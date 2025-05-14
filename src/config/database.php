@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = 'mysql';
-    private $db_name = 'Sabrina_db';
+    private $db_name = 'Gestion_db';
     private $username = 'user';
     private $password = 'password';
     private $conn;

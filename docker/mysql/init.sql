@@ -1,4 +1,4 @@
-USE Sabrina_db;
+USE Gestion_db;
 -- Création des tables
 CREATE TABLE IF NOT EXISTS clients (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -7,15 +7,17 @@ CREATE TABLE IF NOT EXISTS clients (
     email VARCHAR(255) UNIQUE,
     date_inscription DATE
 );
-
-CREATE TABLE IF NOT EXISTS commandes (
+CREATE TABLE IF NOT EXISTS conges (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    client_id INT,
-    date_commande DATETIME,
-    montant DECIMAL(10, 2),
-    statut VARCHAR(50),
-    FOREIGN KEY (client_id) REFERENCES clients(id)
+    id_user INT NOT NULL,
+    type_conge VARCHAR(50) NOT NULL,
+    date_debut DATE NOT NULL,
+    date_fin DATE NOT NULL,
+    motif TEXT,
+    statut ENUM('en attente', 'accepté', 'refusé') DEFAULT 'en attente',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 -- Insertion de données de test
 INSERT INTO clients (nom, prenom, email, date_inscription) VALUES
@@ -30,3 +32,4 @@ INSERT INTO commandes (client_id, date_commande, montant, statut) VALUES
 (1, '2023-05-15 16:45:00', 45.20, 'En préparation'),
 (3, '2023-05-18 11:20:00', 210.75, 'Livrée'),
 (4, '2023-05-20 13:10:00', 65.30, 'En cours');
+
